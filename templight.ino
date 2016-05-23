@@ -27,7 +27,7 @@ Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ80
 void setup() {
     Serial.begin(9600);
     if (!bmp.begin()) {
-    Serial.println("Es ist kein Sensor gefunden worden!");
+	  Serial.println("Es ist kein Sensor gefunden worden!");
     while (1) {}
   }
     pixels.begin();
@@ -46,77 +46,77 @@ void loop() {
 // Bestimmt den Anteil an Rot
 
     if(temp<=-20){
-    int red=208;}
+	 int red=208;}
 
     else if(temp>-20&&tempC<=-15){
-    red = map(temp, -20, -15, 208, 206);}
+	  red = map(temp, -20, -15, 208, 206);}
 
     else if(temp>-15&&tempC<=-10){
-    red = map(temp, -15, -10, 206, 78);}
+	   red = map(temp, -15, -10, 206, 78);}
 
     else if(temp>-10&&tempC<=-5){
-    red = map(temp, -10, -5, 78, 72);}
+	   red = map(temp, -10, -5, 78, 72);}
 
     else if(temp>-5&&tempC<=-1){
-    red = map(temp, -5, -1, 72, 188);}
+	   red = map(temp, -5, -1, 72, 188);}
 
     else if(temp>-1&&tempC<0){
-	red = map(temp, -1, 0, 188, 255);}
+	   red = map(temp, -1, 0, 188, 255);}
 
-	else if(temp=0){
-	red=255;}
+    else if(temp=0){
+           red=255;}
 
-	else if(temp>0&&tempC<=1){
-	red = map(temp, 0, 1, 255, 184);}
+    else if(temp>0&&tempC<=1){
+	   red = map(temp, 0, 1, 255, 184);}
 
-	else if(temp>1&&tempC<=5){
-	red = map(temp, 1, 5, 184, 169);}
+    else if(temp>1&&tempC<=5){
+	   red = map(temp, 1, 5, 184, 169);}
 
-	else if(temp>5&&tempC<=10){
-	red = map(temp, 5, 10, 169, 147);}
+    else if(temp>5&&tempC<=10){
+	   red = map(temp, 5, 10, 169, 147);}
 
-	else if(temp>10&&tempC<=15){
-	red = map(temp, 10, 15, 147, 255);}
+    else if(temp>10&&tempC<=15){
+	   red = map(temp, 10, 15, 147, 255);}
 
-	else if(temp>15&&tempC<=20){
-	red = map(temp, 15, 20, 255, 249);}
+    else if(temp>15&&tempC<=20){
+	   red = map(temp, 15, 20, 255, 249);}
 
-	else if(temp>20&&tempC<=25){
-	red = map(temp, 5, 10, 249, 254);}
+    else if(temp>20&&tempC<=25){
+	   red = map(temp, 5, 10, 249, 254);}
 
-	else if(temp>25&&tempC<=30){
-	red = map(temp, 10, 15, 254, 255);}
+    else if(temp>25&&tempC<=30){
+	   red = map(temp, 10, 15, 254, 255);}
 
-	else if(temp>30&&tempC<=35){
-	red = map(temp, 15, 20, 254, 255);}
+    else if(temp>30&&tempC<=35){
+	   red = map(temp, 15, 20, 254, 255);}
 
     else if(temp>35){
-    red=254;}
+	   red=254;}
 
 // Bestimmt den Anteil an Gruen
 
     if(temp<=-20){
-    int green=63;}
+	   int green=63;}
 
     else if(temp>-20&&tempC<=-15){
-    green = map(temp, -20, -15, 63, 102);}
+	   green = map(temp, -20, -15, 63, 102);}
 
     else if(temp>-15&&tempC<=-10){
-    green = map(temp, -15, -10, 102, 112);}
+	   green = map(temp, -15, -10, 102, 112);}
 
     else if(temp>-10&&tempC<=-5){
-    green = map(temp, -10, -5, 112, 158);}
+	   green = map(temp, -10, -5, 112, 158);}
 
     else if(temp>-5&&tempC<=-1){
-    green = map(temp, -5, -1, 158, 224);}
+	   green = map(temp, -5, -1, 158, 224);}
 
     else if(temp>-1&&tempC<0){
-	green = map(temp, -1, 0, 224, 255);}
+	   green = map(temp, -1, 0, 224, 255);}
 
-	else if(temp=0){
-	green=255;}
+    else if(temp=0){
+	   green=255;}
 
-	else if(temp>0&&tempC<=1){
+    else if(temp>0&&tempC<=1){
 	green = map(temp, 0, 1, 255, 243);}
 
 	else if(temp>1&&tempC<=5){
