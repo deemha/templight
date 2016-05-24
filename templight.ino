@@ -1,19 +1,5 @@
 // Templight
 // Dirk Heiden, 2016
-
-#include <Wire.h>
-#include <Adafruit_BMP085.h>
-
-#include <Adafruit_NeoPixel.h>
-
-//#ifdef __AVR__
-//#include <avr/power.h>
-//#endif
-
-#define PIN            4
-
-#define NUMPIXELS      12
-
 // BMP085 verbinden
 // Verbinde VCC an 3.3V
 // Verbinde GND to Ground
@@ -21,183 +7,193 @@
 // Verbinde SDA an Analog 4 (i2c data) 
 // Adafruit Neopixel verbinden
 
+#include <Wire.h>
+#include <Adafruit_BMP085.h>
+#include <Adafruit_NeoPixel.h>
+
+#define PIN            4
+#define NUMPIXELS      12
+
 Adafruit_BMP085 bmp;
 Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
   
 void setup() {
-    Serial.begin(9600);
-    if (!bmp.begin()) {
+	Serial.begin(9600);
+	if (!bmp.begin()) {
 		Serial.println("Es ist kein Sensor gefunden worden!");
-    while (1) {}
+	while (1) {}
   }
     pixels.begin();
 }
  
 void loop() {
-    float temp = (float)bmp.readTemperature();
-//    int red= 0;
-//    int green= 0;
-//    int blue= 0;
+
+	int red= 0;
+	int green= 0;
+	int blue= 0;
 
 // Beginn der Schleife
 
 	for(int i=0;i<NUMPIXELS;i++){
 
+	float temp = (float)bmp.readTemperature();
+
+	Serial.print(temp,1);
+	Serial.println();
+
 // Bestimmt den Anteil an Rot
 
 	if(temp<=-20){
-		int red=208;}
+		red=204;}
 
 	else if(temp>-20&&temp<=-15){
-		red = map(temp, -20, -15, 208, 206);}
+		red = map(temp, -20, -15, 204, 255);}
 
 	else if(temp>-15&&temp<=-10){
-		red = map(temp, -15, -10, 206, 78);}
+		red = map(temp, -15, -10, 255, 0);}
 
 	else if(temp>-10&&temp<=-5){
-		red = map(temp, -10, -5, 78, 72);}
+		red = map(temp, -10, -5, 0, 102);}
 
 	else if(temp>-5&&temp<=-1){
-		red = map(temp, -5, -1, 72, 188);}
+		red = map(temp, -5, -1, 102, 153);}
 
-	else if(temp>-1&&temp<0){
-		red = map(temp, -1, 0, 188, 255);}
-
-	else if(temp=0){
-		red=255;}
+	else if(temp>-1&&temp<=0){
+		red = map(temp, -1, 0, 153, 255);}
 
 	else if(temp>0&&temp<=1){
-		red = map(temp, 0, 1, 255, 184);}
+		red = map(temp, 0, 1, 255, 204);}
 
 	else if(temp>1&&temp<=5){
-		red = map(temp, 1, 5, 184, 169);}
+		red = map(temp, 1, 5, 204, 102);}
 
 	else if(temp>5&&temp<=10){
-		red = map(temp, 5, 10, 169, 147);}
+		red = map(temp, 5, 10, 102, 0);}
 
 	else if(temp>10&&temp<=15){
-		red = map(temp, 10, 15, 147, 255);}
+		red = map(temp, 10, 15, 0, 255);}
 
 	else if(temp>15&&temp<=20){
-		red = map(temp, 15, 20, 255, 249);}
+		red = map(temp, 15, 20, 255, 255);}
 
 	else if(temp>20&&temp<=25){
-		red = map(temp, 5, 10, 249, 254);}
+		red = map(temp, 20, 25, 255, 255);}
 
 	else if(temp>25&&temp<=30){
-		red = map(temp, 10, 15, 254, 255);}
+		red = map(temp, 25, 30, 255, 255);}
 
 	else if(temp>30&&temp<=35){
-		red = map(temp, 15, 20, 254, 255);}
+		red = map(temp, 30, 35, 255, 255);}
 
 	else if(temp>35){
-		red=254;}
+		red=255;}
 
 // Bestimmt den Anteil an Gruen
 
 	if(temp<=-20){
-		int green=63;}
+		green=0;}
 
 	else if(temp>-20&&temp<=-15){
-		green = map(temp, -20, -15, 63, 102);}
+		green = map(temp, -20, -15, 0, 153);}
 
 	else if(temp>-15&&temp<=-10){
-		green = map(temp, -15, -10, 102, 112);}
+		green = map(temp, -15, -10, 153, 0);}
 
 	else if(temp>-10&&temp<=-5){
-		green = map(temp, -10, -5, 112, 158);}
+		green = map(temp, -10, -5, 0, 153);}
 
 	else if(temp>-5&&temp<=-1){
-		green = map(temp, -5, -1, 158, 224);}
+		green = map(temp, -5, -1, 153, 204);}
 
-	else if(temp>-1&&temp<0){
-		green = map(temp, -1, 0, 224, 255);}
-
-	else if(temp=0){
-		green=255;}
+	else if(temp>-1&&temp<=0){
+		green = map(temp, -1, 0, 204, 255);}
 
 	else if(temp>0&&temp<=1){
-		green = map(temp, 0, 1, 255, 243);}
+		green = map(temp, 0, 1, 255, 255);}
 
 	else if(temp>1&&temp<=5){
-		green = map(temp, 1, 5, 243, 205);}
+		green = map(temp, 1, 5, 255, 255);}
 
 	else if(temp>5&&temp<=10){
-		green = map(temp, 5, 10, 205, 194);}
+		green = map(temp, 5, 10, 255, 255);}
 
 	else if(temp>10&&temp<=15){
-		green = map(temp, 10, 15, 194, 225);}
+		green = map(temp, 10, 15, 255, 255);}
 
 	else if(temp>15&&temp<=20){
-		green = map(temp, 15, 20, 225, 132);}
+		green = map(temp, 15, 20, 255, 153);}
 
 	else if(temp>20&&temp<=25){
-		green = map(temp, 5, 10, 132, 51);}
+		green = map(temp, 20, 25, 153, 0);}
 
 	else if(temp>25&&temp<=30){
-		green = map(temp, 10, 15, 51, 57);}
+		green = map(temp, 25, 30, 0, 0);}
 
 	else if(temp>30&&temp<=35){
-		green = map(temp, 15, 20, 57, 140);}
+		green = map(temp, 30, 35, 0, 153);}
 
 	else if(temp>35){
-		green=140;}
+		green=153;}
 
 // Bestimmt den Anteil an Blau
 
 	if(temp<=-20){
-		int blue=244;}
+		blue=153;}
 
 	else if(temp>-20&&temp<=-15){
-		blue = map(temp, -20, -15, 244, 200);}
+		blue = map(temp, -20, -15, 153, 255);}
 
 	else if(temp>-15&&temp<=-10){
-		blue = map(temp, -15, -10, 200, 209);}
+		blue = map(temp, -15, -10, 255, 255);}
 
 	else if(temp>-10&&temp<=-5){
-		blue = map(temp, -10, -5, 209, 231);}
+		blue = map(temp, -10, -5, 255, 255);}
 
 	else if(temp>-5&&temp<=-1){
-		blue = map(temp, -5, -1, 231, 254);}
+		blue = map(temp, -5, -1, 255, 255);}
 
-	else if(temp>-1&&temp<0){
-		blue = map(temp, -1, 0, 254, 255);}
-
-	else if(temp=0){
-		blue=255;}
+	else if(temp>-1&&temp<=0){
+		blue = map(temp, -1, 0, 255, 255);}
 
 	else if(temp>0&&temp<=1){
-		blue = map(temp, 0, 1, 255, 133);}
+		blue = map(temp, 0, 1, 255, 153);}
 
 	else if(temp>1&&temp<=5){
-		blue = map(temp, 1, 5, 133, 57);}
+		blue = map(temp, 1, 5, 153, 51);}
 
 	else if(temp>5&&temp<=10){
-		blue = map(temp, 5, 10, 57, 0);}
+		blue = map(temp, 5, 10, 51, 0);}
 
 	else if(temp>10&&temp<=15){
-		blue = map(temp, 10, 15, 0, 3);}
+		blue = map(temp, 10, 15, 0, 0);}
 
 	else if(temp>15&&temp<=20){
-		blue = map(temp, 15, 20, 3, 18);}
+		blue = map(temp, 15, 20, 0, 51);}
 
 	else if(temp>20&&temp<=25){
-		blue = map(temp, 5, 10, 18, 47);}
+		blue = map(temp, 20, 25, 51, 0);}
 
 	else if(temp>25&&temp<=30){
-		blue = map(temp, 10, 15, 47, 145);}
+		blue = map(temp, 25, 30, 0, 255);}
 
 	else if(temp>30&&temp<=35){
-		blue = map(temp, 15, 20, 145, 191);}
+		blue = map(temp, 30,35, 255, 255);}
 
 	else if(temp>35){
-		blue=191;}
+		blue=255;}
 
 // Sendet den berechneten RGB-Wert an die jeweilige LED
 
     pixels.setPixelColor(i, pixels.Color(red,green,blue));
     pixels.show();
+
+    Serial.print("Pixel: ");
+    Serial.print(i);
+    Serial.println();
+	Serial.print("RGB-Wert: ");
+	Serial.print(red,green,blue);
+	Serial.println();
     
-    delay(30000);
+    delay(10000);
     }
 }
